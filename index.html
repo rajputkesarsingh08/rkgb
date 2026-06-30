@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aashapura Mobiles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+
+/* =========================================================
+   EASY CUSTOMIZATION
+   Search for "OWNER SETTINGS" in the <script> tag below to
+   change: shop name, login username/password, categories,
+   colors, contact links — everything is in one place.
+   ========================================================= */
+
+:root{
+  --bg-deep:#0a0f1c;
+  --bg-panel:#101728;
+  --bg-card:#131c30;
+  --bg-card-hover:#172238;
+  --line:#22304a;
+  --gold:#e8a33d;
+  --gold-soft:#f4c97a;
+  --text-1:#eef0f4;
+  --text-2:#97a1b8;
+  --text-3:#5f6b85;
+  --green:#3fa66a;
+  --danger:#d9534f;
+  --radius:14px;
+  --overlay-bg:rgba(5,8,15,0.78);
+  --modal-close-bg:rgba(0,0,0,.4);
+}
+
+body[data-theme="light"]{
+  --bg-deep:#f6f4ef;
+  --bg-panel:#ffffff;
+  --bg-card:#ffffff;
+  --bg-card-hover:#fbf7ee;
+  --line:#e6e1d6;
+  --gold:#c8791f;
+  --gold-soft:#b3690f;
+  --text-1:#231e16;
+  --text-2:#5d5546;
+  --text-3:#938a78;
+  --green:#2f8a55;
+  --danger:#c2473f;
+  --overlay-bg:rgba(35,30,22,0.45);
+  --modal-close-bg:rgba(35,30,22,.55);
+}
+body[data-theme="light"] .bg-glow{
+  background:
+    radial-gradient(600px 400px at 85% -5%, rgba(200,121,31,0.08), transparent 60%),
+    radial-gradient(500px 500px at 5% 10%, rgba(47,138,85,0.05), transparent 60%);
+}
+body[data-theme="light"] .card,
+body[data-theme="light"] .platform-row,
+body[data-theme="light"] .manage-item{
+  box-shadow:0 1px 3px rgba(35,30,22,0.06);
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg-deep);
+  color:var(--text-1);
+  font-family:'Inter',sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.01em;}
+.mono{font-family:'JetBrains Mono',monospace;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+::selection{background:var(--gold);color:#1a1206;}
+
+.bg-glow{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(600px 400px at 85% -5%, rgba(232,163,61,0.10), transparent 60%),
+    radial-gradient(500px 500px at 5% 10%, rgba(63,166,106,0.05), transparent 60%);
+}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:40;
+  background:rgba(10,15,28,0.85);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{max-width:1220px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:14px 20px;}
+.burger{
+  width:42px;height:42px;border-radius:10px;background:var(--bg-card);border:1px solid var(--line);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex-shrink:0;transition:.2s;
+}
+.burger:hover{background:var(--bg-card-hover);border-color:var(--gold);}
+.burger span{width:18px;height:2px;background:var(--text-1);border-radius:2px;}
+.burger:hover span{background:var(--gold);}
+
+.brand{display:flex;align-items:center;gap:10px;flex:1;min-width:0;}
+.brand-mark{
+  width:38px;height:38px;border-radius:10px;background:linear-gradient(145deg,var(--gold),#9c6a1f);
+  display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;color:#1a1206;font-size:17px;flex-shrink:0;
+}
+.brand-text h1{font-size:18px;margin:0;line-height:1.1;font-weight:700;}
+.brand-text span{font-size:11px;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase;}
+
+.search-wrap{flex:1;max-width:300px;display:none;}
+@media(min-width:860px){.search-wrap{display:block;}}
+.search-wrap input{
+  width:100%;background:var(--bg-card);border:1px solid var(--line);border-radius:10px;
+  padding:10px 14px;color:var(--text-1);font-size:13px;
+}
+.search-wrap input:focus{outline:none;border-color:var(--gold);}
+.search-wrap input::placeholder{color:var(--text-3);}
+
+.sort-wrap select{
+  background:var(--bg-card);border:1px solid var(--line);border-radius:10px;color:var(--text-1);
+  padding:10px 12px;font-size:13px;flex-shrink:0;
+}
+.sort-wrap select:focus{outline:none;border-color:var(--gold);}
+
+.chips-bar{
+  max-width:1220px;margin:0 auto;padding:14px 20px 4px 20px;
+  display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;
+}
+.chips-bar::-webkit-scrollbar{display:none;}
+.chip{
+  flex-shrink:0;padding:8px 16px;border-radius:999px;background:var(--bg-card);border:1px solid var(--line);
+  font-size:13px;color:var(--text-2);transition:.2s;font-weight:500;
+}
+.chip:hover{border-color:var(--gold-soft);color:var(--text-1);}
+.chip.active{background:var(--gold);color:#1a1206;border-color:var(--gold);}
+
+main{max-width:1220px;margin:0 auto;padding:8px 20px 80px;position:relative;z-index:1;}
+
+.hero{
+  margin:18px 0 22px;padding:30px 26px;border-radius:18px;
+  background:linear-gradient(120deg, rgba(232,163,61,0.10), rgba(63,166,106,0.05));
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+}
+.hero h2{font-size:24px;margin:0 0 6px;}
+.hero p{margin:0;color:var(--text-2);font-size:14px;max-width:480px;}
+.hero-tag{font-family:'JetBrains Mono';font-size:11px;color:var(--gold-soft);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;display:block;}
+
+.toolbar{display:flex;justify-content:flex-end;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+.toolbar .search-wrap-mobile{display:none;flex:1;}
+@media(max-width:859px){.toolbar .search-wrap-mobile{display:block;}
+  .toolbar .search-wrap-mobile input{
+    width:100%;background:var(--bg-card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;color:var(--text-1);font-size:13px;
+  }
+}
+
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));}
+.card{
+  background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;cursor:pointer;position:relative;transition:transform .25s,border-color .25s,box-shadow .25s;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 14px 30px -10px rgba(232,163,61,.18);}
+.card-img{width:100%;aspect-ratio:1/1;background:#0c1322;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.card:hover .card-img img{transform:scale(1.06);}
+.scan{
+  position:absolute;left:0;right:0;top:-100%;height:60%;
+  background:linear-gradient(180deg, rgba(232,163,61,0) 0%, rgba(232,163,61,.18) 50%, rgba(232,163,61,0) 100%);
+  transition:top .6s ease;pointer-events:none;
+}
+.card:hover .scan{top:140%;}
+.card-img .ph{color:var(--text-3);font-size:12px;font-family:'JetBrains Mono';}
+.discount-badge{
+  position:absolute;top:8px;left:8px;background:var(--green);color:#fff;font-size:10.5px;font-weight:700;
+  padding:3px 7px;border-radius:6px;font-family:'JetBrains Mono';
+}
+.platform-count-badge{
+  position:absolute;top:8px;right:8px;background:rgba(0,0,0,.55);color:var(--gold-soft);font-size:10px;
+  padding:3px 7px;border-radius:6px;font-family:'JetBrains Mono';
+}
+.card-body{padding:13px 14px 14px;}
+.card-cat{font-size:10px;color:var(--gold-soft);text-transform:uppercase;letter-spacing:.07em;font-family:'JetBrains Mono';}
+.card-title{font-size:14.5px;font-weight:600;margin:5px 0 8px;line-height:1.3;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.price-row{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;}
+.card-price{font-family:'JetBrains Mono';font-size:15.5px;color:var(--text-1);font-weight:700;}
+.card-price::before{content:'₹';color:var(--gold);margin-right:1px;}
+.card-mrp{font-family:'JetBrains Mono';font-size:12px;color:var(--text-3);text-decoration:line-through;}
+.card-mrp::before{content:'₹';}
+.card-best-tag{font-size:10px;color:var(--text-3);margin-top:4px;font-family:'JetBrains Mono';}
+
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-3);}
+.empty-state h3{color:var(--text-2);margin-bottom:6px;}
+
+/* ---------- product modal ---------- */
+.overlay{
+  position:fixed;inset:0;background:var(--overlay-bg);backdrop-filter:blur(4px);
+  z-index:100;display:none;align-items:center;justify-content:center;padding:18px;
+}
+.overlay.show{display:flex;}
+.modal{
+  background:var(--bg-panel);border:1px solid var(--line);border-radius:18px;
+  max-width:900px;width:100%;max-height:90vh;overflow-y:auto;
+  display:grid;grid-template-columns:1fr;position:relative;
+}
+@media(min-width:700px){.modal{grid-template-columns:1fr 1fr;}}
+.modal-close{
+  position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;
+  background:var(--modal-close-bg);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;z-index:5;
+}
+.modal-gallery{background:#0c1322;}
+.modal-gallery-main{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;}
+.modal-thumbs{display:flex;gap:6px;padding:10px;overflow-x:auto;}
+.modal-thumbs img{width:50px;height:50px;border-radius:8px;object-fit:cover;cursor:pointer;border:1px solid var(--line);opacity:.6;flex-shrink:0;}
+.modal-thumbs img.active{opacity:1;border-color:var(--gold);}
+.modal-info{padding:24px 24px 26px;display:flex;flex-direction:column;}
+.modal-cat{font-size:11px;color:var(--gold-soft);text-transform:uppercase;letter-spacing:.07em;font-family:'JetBrains Mono';margin-bottom:8px;}
+.modal-info h2{font-size:21px;margin:0 0 10px;line-height:1.25;}
+.modal-price-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:4px;}
+.modal-price{font-family:'JetBrains Mono';font-size:26px;font-weight:700;}
+.modal-price::before{content:'₹';color:var(--gold);}
+.modal-mrp{font-family:'JetBrains Mono';font-size:15px;color:var(--text-3);text-decoration:line-through;}
+.modal-mrp::before{content:'₹';}
+.modal-discount{background:rgba(63,166,106,.15);color:var(--green);font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'JetBrains Mono';}
+.modal-best-note{font-size:12px;color:var(--text-3);margin-bottom:16px;}
+.modal-desc{color:var(--text-2);font-size:13.5px;line-height:1.65;margin-bottom:20px;white-space:pre-wrap;}
+
+.compare-label{font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;font-family:'JetBrains Mono';margin-bottom:10px;}
+.platform-list{display:flex;flex-direction:column;gap:8px;margin-top:auto;}
+.platform-row{
+  display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:11px;
+  border:1px solid var(--line);background:var(--bg-card);
+}
+.platform-row.best{border-color:var(--gold);background:rgba(232,163,61,.08);}
+.plogo{
+  width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk';font-weight:700;font-size:12px;color:#fff;flex-shrink:0;
+}
+.prow-mid{flex:1;min-width:0;}
+.prow-name{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;}
+.best-pill{font-size:9.5px;background:var(--gold);color:#1a1206;padding:2px 6px;border-radius:5px;font-weight:700;}
+.prow-price{font-family:'JetBrains Mono';font-size:14px;color:var(--text-1);font-weight:600;}
+.prow-price::before{content:'₹';color:var(--gold);}
+.prow-buy{
+  background:var(--bg-card-hover);border:1px solid var(--line);color:var(--text-1);font-size:12px;font-weight:600;
+  padding:8px 14px;border-radius:8px;transition:.2s;flex-shrink:0;
+}
+.prow-buy:hover{border-color:var(--gold);color:var(--gold-soft);}
+.platform-row.best .prow-buy{background:var(--gold);color:#1a1206;border-color:var(--gold);}
+.platform-row.best .prow-buy:hover{background:var(--gold-soft);}
+
+/* ---------- admin drawer ---------- */
+.drawer-overlay{position:fixed;inset:0;background:rgba(5,8,15,.6);z-index:90;display:none;}
+.drawer-overlay.show{display:block;}
+.drawer{
+  position:fixed;top:0;left:0;height:100%;width:380px;max-width:94vw;background:var(--bg-panel);
+  border-right:1px solid var(--line);z-index:95;transform:translateX(-105%);transition:transform .3s ease;
+  display:flex;flex-direction:column;
+}
+.drawer.show{transform:translateX(0);}
+.drawer-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;}
+.drawer-head h3{margin:0;font-size:15px;}
+.drawer-close{width:30px;height:30px;border-radius:8px;background:var(--bg-card);color:var(--text-2);font-size:16px;}
+.drawer-body{padding:20px;overflow-y:auto;flex:1;}
+
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:12px;color:var(--text-3);margin-bottom:6px;font-weight:500;}
+.field input,.field select,.field textarea{
+  width:100%;background:var(--bg-card);border:1px solid var(--line);border-radius:9px;
+  padding:10px 12px;color:var(--text-1);font-size:13.5px;font-family:inherit;
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);}
+.field textarea{resize:vertical;min-height:64px;}
+.hint{font-size:11px;color:var(--text-3);margin-top:5px;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+.btn{width:100%;padding:12px;border-radius:10px;font-weight:600;font-size:13.5px;transition:.2s;}
+.btn-gold{background:var(--gold);color:#1a1206;}
+.btn-gold:hover{background:var(--gold-soft);}
+.btn-ghost{background:var(--bg-card);color:var(--text-2);border:1px solid var(--line);}
+.btn-ghost:hover{border-color:var(--text-3);}
+.btn-danger{background:transparent;color:var(--danger);border:1px solid rgba(217,83,79,.4);padding:6px 10px;font-size:11.5px;border-radius:7px;}
+.btn-danger:hover{background:rgba(217,83,79,.1);}
+.btn-small{padding:8px 10px;font-size:12px;border-radius:8px;}
+
+.login-box{padding:4px 0;}
+.login-error{color:var(--danger);font-size:12px;margin-top:6px;display:none;}
+
+.section-label{font-size:11px;color:var(--gold-soft);text-transform:uppercase;letter-spacing:.07em;font-family:'JetBrains Mono';margin:22px 0 10px;}
+
+.platform-input-row{
+  display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:6px;align-items:center;margin-bottom:8px;
+}
+.platform-input-row input{
+  background:var(--bg-card);border:1px solid var(--line);border-radius:8px;padding:8px 9px;color:var(--text-1);font-size:12.5px;
+}
+.platform-input-row input:focus{outline:none;border-color:var(--gold);}
+.rm-row{background:var(--bg-card);border:1px solid var(--line);color:var(--danger);border-radius:8px;width:30px;height:30px;font-size:13px;}
+
+.upload-zone{
+  border:1.5px dashed var(--line);border-radius:10px;padding:14px;text-align:center;cursor:pointer;
+  font-size:12px;color:var(--text-3);transition:.2s;
+}
+.upload-zone:hover{border-color:var(--gold);color:var(--gold-soft);}
+.upload-previews{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.upload-thumb{position:relative;width:54px;height:54px;border-radius:8px;overflow:hidden;border:1px solid var(--line);}
+.upload-thumb img{width:100%;height:100%;object-fit:cover;}
+.upload-thumb .rm{
+  position:absolute;top:1px;right:1px;width:16px;height:16px;background:rgba(0,0,0,.7);color:#fff;
+  border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center;
+}
+
+.manage-item{display:flex;align-items:center;gap:10px;padding:9px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:var(--bg-card);}
+.manage-item img{width:38px;height:38px;border-radius:7px;object-fit:cover;flex-shrink:0;background:#0c1322;}
+.manage-item .mi-name{font-size:12.5px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.logout-row{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);}
+
+footer{border-top:1px solid var(--line);background:var(--bg-panel);position:relative;z-index:1;}
+.footer-inner{max-width:1220px;margin:0 auto;padding:36px 20px 28px;display:grid;gap:26px;grid-template-columns:1fr;}
+@media(min-width:680px){.footer-inner{grid-template-columns:1.2fr 1fr 1fr;}}
+.footer-inner h4{font-size:13px;color:var(--text-2);margin:0 0 12px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;}
+.footer-brand p{color:var(--text-3);font-size:13px;line-height:1.6;margin:8px 0 0;}
+.footer-links{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+.footer-links a{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--text-2);transition:.15s;}
+.footer-links a:hover{color:var(--gold-soft);}
+.ico{width:18px;height:18px;flex-shrink:0;}
+.footer-bottom{text-align:center;font-size:11.5px;color:var(--text-3);padding:16px 20px;border-top:1px solid var(--line);}
+
+@media(max-width:480px){.modal-info{padding:20px;}.hero{padding:22px 18px;}.platform-input-row{grid-template-columns:1fr 1fr;}}
+
+/* ---------- theme toggle ---------- */
+.theme-toggle{
+  position:fixed;bottom:20px;right:20px;z-index:60;
+  width:50px;height:50px;border-radius:50%;
+  background:var(--bg-card);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 20px -6px rgba(0,0,0,.35);
+  transition:transform .2s, border-color .2s;
+}
+.theme-toggle:hover{transform:translateY(-2px);border-color:var(--gold);}
+.theme-toggle svg{width:22px;height:22px;color:var(--text-1);}
+.theme-toggle .icon-sun{display:none;}
+body[data-theme="light"] .theme-toggle .icon-moon{display:none;}
+body[data-theme="light"] .theme-toggle .icon-sun{display:block;}
+@media(max-width:480px){.theme-toggle{bottom:16px;right:16px;width:46px;height:46px;}}
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="bg-glow"></div>
+
+<header>
+  <div class="header-inner">
+    <button class="burger" id="burgerBtn" aria-label="Menu" title="Owner panel">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="brand">
+      <div class="brand-mark" id="brandMark">A</div>
+      <div class="brand-text">
+        <h1 id="shopName">Aashapura Mobiles</h1>
+        <span id="shopTag">Mobiles &amp; Accessories</span>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="Search products...">
+    </div>
+    <div class="sort-wrap">
+      <select id="sortSelect">
+        <option value="recommended">Recommended</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low</option>
+      </select>
+    </div>
+  </div>
+  <div class="chips-bar" id="chipsBar"></div>
+</header>
+
+<main>
+  <div class="hero">
+    <div>
+      <span class="hero-tag">In-store catalog · Verified Sellers</span>
+      <h2>Browse the shop, buy at the best price</h2>
+      <p>Every product here is listed by the shop owner across multiple platforms. We always show you the lowest price first — pick any platform to buy.</p>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search-wrap-mobile"><input type="text" id="searchInputMobile" placeholder="Search products..."></div>
+  </div>
+
+  <div id="gridWrap">
+    <div class="grid" id="productGrid"></div>
+  </div>
+</main>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="overlay" id="productOverlay">
+  <div class="modal" id="productModal">
+    <button class="modal-close" id="modalCloseBtn">✕</button>
+    <div class="modal-gallery">
+      <img class="modal-gallery-main" id="modalMainImg" src="" alt="">
+      <div class="modal-thumbs" id="modalThumbs"></div>
+    </div>
+    <div class="modal-info">
+      <div class="modal-cat" id="modalCat"></div>
+      <h2 id="modalTitle"></h2>
+      <div class="modal-price-row">
+        <div class="modal-price" id="modalPrice"></div>
+        <div class="modal-mrp" id="modalMrp"></div>
+        <div class="modal-discount" id="modalDiscount"></div>
+      </div>
+      <div class="modal-best-note" id="modalBestNote"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="compare-label">Compare prices across platforms</div>
+      <div class="platform-list" id="platformList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- OWNER DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3 id="drawerHeadTitle">Owner Login</h3>
+    <button class="drawer-close" id="drawerCloseBtn">✕</button>
+  </div>
+  <div class="drawer-body">
+
+    <div id="loginView" class="login-box">
+      <p style="font-size:12.5px;color:var(--text-3);margin:0 0 16px;">Sign in to add or manage products on this site.</p>
+      <div class="field">
+        <label>Username</label>
+        <input type="text" id="loginUser" autocomplete="username">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="loginPass" autocomplete="current-password">
+      </div>
+      <div class="login-error" id="loginError">Incorrect username or password.</div>
+      <button class="btn btn-gold" id="loginBtn" style="margin-top:6px;">Login</button>
+      <!-- <p class="hint" style="margin-top:14px;">Default sample login — username: <b>owner</b>, password: <b>aashapura@123</b>. Change this in the code (see OWNER SETTINGS).</p> -->
+    </div>
+
+    <div id="adminView" style="display:none;">
+      <div class="section-label">Add New Product</div>
+      <div class="field">
+        <label>Product Name</label>
+        <input type="text" id="pName" placeholder="e.g. 33W Fast Charger">
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label>Category</label>
+          <select id="pCategory"></select>
+        </div>
+        <div class="field">
+          <label>MRP / Original Price (₹)</label>
+          <input type="number" id="pMrp" placeholder="999">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Product Photos</label>
+        <div class="upload-zone" id="uploadZone">📷 Click to upload photo(s) from your device</div>
+        <input type="file" id="fileInput" accept="image/*" multiple style="display:none;">
+        <div class="upload-previews" id="uploadPreviews"></div>
+        <div class="hint">Or paste image link(s) below (comma separated) instead of/along with uploads.</div>
+        <input type="text" id="pImageUrls" placeholder="https://...jpg, https://...jpg" style="margin-top:8px;">
+      </div>
+
+      <div class="field">
+        <label>Description / Specifications</label>
+        <textarea id="pDesc" placeholder="Brand, model, warranty, specs, anything buyers should know..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>Selling Prices by Platform</label>
+        <div id="platformRows"></div>
+        <button class="btn btn-ghost btn-small" id="addPlatformRowBtn" type="button" style="width:auto;">+ Add another platform</button>
+        <div class="hint">Add the same product on multiple platforms (Amazon, Flipkart, Meesho...) with each one's price and link. The lowest price is shown to customers automatically.</div>
+      </div>
+
+      <button class="btn btn-gold" id="addProductBtn">+ Add Product</button>
+
+      <div class="section-label">Manage Products (<span id="prodCount">0</span>)</div>
+      <div id="manageList"></div>
+
+      <div class="logout-row">
+        <button class="btn btn-ghost" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h4 id="footerShopName">Aashapura Mobiles</h4>
+      <p id="footerAbout">Your neighbourhood mobile &amp; accessories shop — listed on Amazon, Flipkart, Meesho and more. We always show the lowest price first.</p>
+    </div>
+    <div>
+      <h4>Find Us</h4>
+      <ul class="footer-links">
+        <li><a href="#" id="footerLocation" target="_blank" rel="noopener noreferrer">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-7.2-7-12a7 7 0 1114 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.4"/></svg>
+          <span id="footerLocationText">View on Map</span>
+        </a></li>
+        <li><a href="#" id="footerEmail">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          <span id="footerEmailText">shop@gmail.com</span>
+          <span>aashapuramobiles@gmail.com</span>
+        </a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul class="footer-links">
+        <li><a href="#" id="footerWhatsapp" target="_blank" rel="noopener noreferrer">
+          <svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1-.2.2-.3.2-.6.1-.9-.4-1.9-1.1-2.7-2.1-.6-.7-.9-1.2-1-1.4-.1-.2 0-.4.1-.5l.4-.5c.1-.2.1-.4 0-.5-.1-.2-.6-1.4-.8-1.9-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9 1-.9 2.3 0 1.4 1 2.7 1.2 2.9.2.2 2 3.1 5 4.2 2.5.9 3 .7 3.5.6.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4 0-.1-.2-.2-.5-.3z"/><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span>WhatsApp</span>
+        </a></li>
+        <li><a href="#" id="footerInstagram" target="_blank" rel="noopener noreferrer">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17.4" cy="6.6" r="0.9" fill="currentColor" stroke="none"/></svg>
+          <span>Instagram</span>
+        </a></li>
+        <li id="extraPlatformLi" style="display:none;"><a href="#" id="footerExtra" target="_blank" rel="noopener noreferrer">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
+          <span id="footerExtraText">Other Platform</span>
+        </a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© <span id="yearNow"></span> <span id="footerYearShop">Aashapura Mobiles</span>. Prices shown are set by the owner per platform and may change — final price is confirmed on the linked platform.</div>
+</footer>
+
+<button class="theme-toggle" id="themeToggle" title="Switch theme" aria-label="Switch light/dark theme">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.4A9 9 0 1111.6 3 7 7 0 0021 12.4z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+</button>
+
+<script>
+/* =========================================================
+   OWNER SETTINGS — change everything here, no need to touch
+   the rest of the file.
+   ========================================================= */
+const CONFIG = {
+  shopName: "Aashapura Mobiles",
+  shopTag: "Mobiles & Accessories",
+  brandLetter: "A",
+  aboutText: "Your neighbourhood mobile & accessories shop — listed on Amazon, Flipkart, Meesho and more. We always show the lowest price first.",
+
+  loginUsername: "owner",
+  loginPassword: "aashapura@123",
+
+  locationMapLink: "https://maps.app.goo.gl/yvbjKQCUfmNFusYi6",
+  locationText: "Shop no. 01, Krishna Industrial Park,Block no. 345, Plot no. 01, Bakrol Bujrang, Gujarat 382430",
+  email: "ksgb7773@gmail.com",
+  whatsapp: "https://wa.me/918200008096",
+  instagram: "https://instagram.com/aashapuramobiles",
+  extraPlatformName: "",
+  extraPlatformLink: "",
+
+  categories: [
+    "Mobile Phones","Chargers","Cables","Power Banks","Earphones & Bluetooth",
+    "Covers & Cases","Smart Watches","Screen Guards","Other Accessories"
+  ],
+
+  // Known platform name -> badge color (any platform name typed by the owner
+  // that isn't in this list just gets a neutral grey badge)
+  platformColors: {
+    "amazon":"#FF9900","flipkart":"#2874F0","meesho":"#9F2089","myntra":"#FF3F6C",
+    "snapdeal":"#E40046","jiomart":"#0078AD","whatsapp":"#3FA66A","shop":"#e8a33d"
+    
+  
+
+  }
+};
+/* ========================================================= */
+
+let products = [];
+let isLoggedIn = false;
+let activeCategory = "All";
+let searchTerm = "";
+let sortMode = "recommended";
+let currentGalleryImgs = [];
+let uploadedImages = []; // base64 strings staged for the product currently being added
+
+const $ = (id) => document.getElementById(id);
+
+/* ---------- sample seed data ---------- */
+function placeholderImg(seed, label, bg){
+  return `https://placehold.co/600x600/${bg}/ffffff?text=${encodeURIComponent(label)}&font=roboto`;
+}
+function buildSeedProducts(){
+  const defs = [
+    ["Mobile Phones","Galaxy Fame X5 (6GB/128GB)", 16999, [["Amazon",15999],["Flipkart",16299],["Meesho",16799]],"1a2b4a"],
+    ["Mobile Phones","Orion Lite 4G Smartphone", 11499, [["Flipkart",10999],["Amazon",11199]],"233357"],
+    ["Mobile Phones","Nova Pro 5G (8GB/256GB)", 24999, [["Amazon",22999],["Meesho",23499],["Flipkart",23799]],"142840"],
+    ["Chargers","33W Fast Charger Adapter", 799, [["Amazon",399],["Flipkart",429],["Meesho",379]],"e8a33d"],
+    ["Chargers","65W GaN Multi-Port Charger", 1499, [["Amazon",1099],["Flipkart",1149]],"c98a2e"],
+    ["Chargers","20W PD Type-C Charger", 599, [["Meesho",299],["Amazon",329]],"d99a35"],
+    ["Cables","Type-C Fast Charging Cable 1m", 399, [["Amazon",149],["Flipkart",169],["Meesho",129]],"3fa66a"],
+    ["Cables","Braided Lightning Cable 1.2m", 499, [["Amazon",249],["Meesho",219]],"2f8a55"],
+    ["Power Banks","20000mAh Power Bank Dual USB", 1999, [["Flipkart",1399],["Amazon",1499],["Meesho",1349]],"9f2089"],
+    ["Power Banks","10000mAh Slim Power Bank", 1299, [["Amazon",899],["Flipkart",949]],"7a1a68"],
+    ["Earphones & Bluetooth","TWS Earbuds Pro ANC", 2499, [["Amazon",1499],["Flipkart",1599],["Meesho",1449]],"2874f0"],
+    ["Earphones & Bluetooth","Wired Earphones with Mic", 499, [["Meesho",199],["Amazon",229]],"1d5bbf"],
+    ["Earphones & Bluetooth","Bluetooth Neckband Sport", 1299, [["Flipkart",799],["Amazon",849]],"144a99"],
+    ["Covers & Cases","Shockproof Back Cover (Clear)", 399, [["Amazon",149],["Meesho",119],["Flipkart",159]],"ff3f6c"],
+    ["Covers & Cases","Leather Flip Case", 599, [["Flipkart",299],["Amazon",329]],"c92f55"],
+    ["Smart Watches","FitTrack Smartwatch Pro", 3999, [["Amazon",2499],["Flipkart",2599],["Meesho",2399]],"0078ad"],
+    ["Smart Watches","Classic Round Smartwatch", 2999, [["Meesho",1799],["Amazon",1899]],"045c87"],
+    ["Screen Guards","Tempered Glass Screen Protector (2pc)", 299, [["Amazon",99],["Meesho",79],["Flipkart",109]],"5f6b85"],
+    ["Other Accessories","Mobile Holder Stand (Adjustable)", 499, [["Flipkart",249],["Amazon",279]],"3a4660"],
+    ["Other Accessories","Selfie Stick with Tripod", 799, [["Amazon",399],["Meesho",349]],"4a5670"]
+  ];
+  return defs.map((d,i)=>{
+    const [category,name,mrp,plats,bg] = d;
+    return {
+      id: 'seed_'+i,
+      name, category, mrp,
+      images: [placeholderImg(i,name.split(' ').slice(0,2).join(' '),bg)],
+      desc: `${name} — genuine quality product available across multiple platforms. 1 year warranty as per platform policy. Contact the shop for bulk or custom orders.`,
+      platforms: plats.map(([pname,price])=>({name:pname,price,link:'https://www.google.com/search?q='+encodeURIComponent(pname+' '+name)})),
+      createdAt: Date.now() - (defs.length-i)*1000
+    };
+  });
+}
+
+function applyConfig(){
+  $('shopName').textContent = CONFIG.shopName;
+  $('shopTag').textContent = CONFIG.shopTag;
+  $('brandMark').textContent = CONFIG.brandLetter;
+  document.title = CONFIG.shopName;
+  $('footerShopName').textContent = CONFIG.shopName;
+  $('footerYearShop').textContent = CONFIG.shopName;
+  $('footerAbout').textContent = CONFIG.aboutText;
+  $('yearNow').textContent = new Date().getFullYear();
+
+  $('footerLocation').href = CONFIG.locationMapLink;
+  $('footerLocationText').textContent = CONFIG.locationText || "View on Map";
+  $('footerEmail').href = "mailto:" + CONFIG.email;
+  $('footerEmailText').textContent = CONFIG.mail;
+  $('footerWhatsapp').href = CONFIG.whatsapp;
+  $('footerInstagram').href = CONFIG.instagram;
+
+  if(CONFIG.extraPlatformName && CONFIG.extraPlatformLink){
+    $('extraPlatformLi').style.display = "";
+    $('footerExtra').href = CONFIG.extraPlatformLink;
+    $('footerExtraText').textContent = CONFIG.extraPlatformName;
+  }
+
+  $('pCategory').innerHTML = CONFIG.categories.map(c=>`<option value="${c}">${c}</option>`).join('');
+  renderChips();
+}
+
+function renderChips(){
+  const bar = $('chipsBar');
+  const cats = ["All", ...CONFIG.categories];
+  bar.innerHTML = cats.map(c =>
+    `<button class="chip ${c===activeCategory?'active':''}" data-cat="${c}">${c}</button>`
+  ).join('');
+  bar.querySelectorAll('.chip').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeCategory = btn.dataset.cat;
+      renderChips();
+      renderGrid();
+    });
+  });
+}
+
+function escapeHtml(s){
+  return (s||"").toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+function platformColor(name){
+  const key = (name||'').trim().toLowerCase();
+  return CONFIG.platformColors[key] || '#5f6b85';
+}
+function platformInitials(name){
+  const n = (name||'?').trim();
+  return n.slice(0,2).toUpperCase();
+}
+
+function lowestPlatform(p){
+  if(!p.platforms || p.platforms.length===0) return null;
+  return p.platforms.slice().sort((a,b)=>Number(a.price)-Number(b.price))[0];
+}
+function discountPercent(p){
+  const low = lowestPlatform(p);
+  if(!low || !p.mrp) return null;
+  const pct = Math.round(((Number(p.mrp)-Number(low.price))/Number(p.mrp))*100);
+  return pct > 0 ? pct : null;
+}
+
+async function loadProducts(){
+  try{
+    const res = await window.storage.get('products', true);
+    products = res ? JSON.parse(res.value) : [];
+  }catch(e){
+    products = [];
+  }
+  if(!products || products.length === 0){
+    products = buildSeedProducts();
+    await saveProducts();
+  }
+  renderGrid();
+  renderManageList();
+}
+
+async function saveProducts(){
+  try{
+    await window.storage.set('products', JSON.stringify(products), true);
+  }catch(e){
+    console.error('Could not save products', e);
+  }
+}
+
+function getFilteredSortedList(){
+  let list = products.slice();
+  if(activeCategory !== "All") list = list.filter(p => p.category === activeCategory);
+  if(searchTerm.trim()){
+    const t = searchTerm.toLowerCase();
+    list = list.filter(p => (p.name||'').toLowerCase().includes(t) || (p.desc||'').toLowerCase().includes(t));
+  }
+  if(sortMode === 'low'){
+    list.sort((a,b)=> (lowestPlatform(a)?Number(lowestPlatform(a).price):Infinity) - (lowestPlatform(b)?Number(lowestPlatform(b).price):Infinity));
+  }else if(sortMode === 'high'){
+    list.sort((a,b)=> (lowestPlatform(b)?Number(lowestPlatform(b).price):-Infinity) - (lowestPlatform(a)?Number(lowestPlatform(a).price):-Infinity));
+  }else{
+    list.sort((a,b)=> (b.createdAt||0)-(a.createdAt||0));
+  }
+  return list;
+}
+
+function renderGrid(){
+  const list = getFilteredSortedList();
+
+  if(list.length === 0){
+    $('gridWrap').innerHTML = `<div class="grid" id="productGrid"></div>`;
+    const empty = document.createElement('div');
+    empty.className = 'empty-state';
+    empty.innerHTML = products.length === 0
+      ? `<h3>No products yet</h3><p>Open the menu (top-left) to log in as the owner and add your first product.</p>`
+      : `<h3>No matching products</h3><p>Try a different category or search term.</p>`;
+    $('gridWrap').appendChild(empty);
+    return;
+  }
+
+  $('gridWrap').innerHTML = `<div class="grid" id="productGrid"></div>`;
+  const g = $('productGrid');
+  g.innerHTML = list.map(p => {
+    const img = (p.images && p.images[0]) || '';
+    const low = lowestPlatform(p);
+    const pct = discountPercent(p);
+    const platCount = (p.platforms||[]).length;
+    return `
+    <div class="card" data-id="${p.id}">
+      <div class="card-img">
+        ${img ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(p.name)}">` : `<span class="ph">No Image</span>`}
+        ${pct ? `<div class="discount-badge">${pct}% OFF</div>` : ''}
+        ${platCount>1 ? `<div class="platform-count-badge">${platCount} platforms</div>` : ''}
+        <div class="scan"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">${escapeHtml(p.category||'')}</div>
+        <div class="card-title">${escapeHtml(p.name)}</div>
+        <div class="price-row">
+          <div class="card-price">${low ? Number(low.price).toLocaleString('en-IN') : '—'}</div>
+          ${p.mrp ? `<div class="card-mrp">${Number(p.mrp).toLocaleString('en-IN')}</div>` : ''}
+        </div>
+        ${low && platCount>1 ? `<div class="card-best-tag">Lowest on ${escapeHtml(low.name)}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+
+  g.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      const id = card.dataset.id;
+      const p = products.find(x=>x.id===id);
+      if(p) openProductModal(p);
+    });
+  });
+}
+
+function openProductModal(p){
+  currentGalleryImgs = (p.images && p.images.length) ? p.images : [];
+  const low = lowestPlatform(p);
+  const pct = discountPercent(p);
+
+  $('modalCat').textContent = p.category || '';
+  $('modalTitle').textContent = p.name;
+  $('modalPrice').textContent = low ? Number(low.price).toLocaleString('en-IN') : '—';
+  $('modalMrp').textContent = p.mrp ? Number(p.mrp).toLocaleString('en-IN') : '';
+  $('modalMrp').style.display = p.mrp ? '' : 'none';
+  $('modalDiscount').textContent = pct ? `${pct}% OFF` : '';
+  $('modalDiscount').style.display = pct ? '' : 'none';
+  $('modalBestNote').textContent = (p.platforms && p.platforms.length>1 && low) ? `Best price right now on ${low.name} — compared across ${p.platforms.length} platforms below.` : '';
+  $('modalDesc').textContent = p.desc || 'No description provided.';
+
+  $('modalMainImg').src = currentGalleryImgs[0] || '';
+  $('modalThumbs').innerHTML = currentGalleryImgs.map((src,i)=>
+    `<img src="${escapeHtml(src)}" data-i="${i}" class="${i===0?'active':''}">`
+  ).join('');
+  $('modalThumbs').querySelectorAll('img').forEach(t=>{
+    t.addEventListener('click', ()=>{
+      $('modalMainImg').src = t.src;
+      $('modalThumbs').querySelectorAll('img').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+    });
+  });
+
+  const sortedPlatforms = (p.platforms||[]).slice().sort((a,b)=>Number(a.price)-Number(b.price));
+  $('platformList').innerHTML = sortedPlatforms.length === 0
+    ? `<p class="hint">No platform links added for this product yet.</p>`
+    : sortedPlatforms.map((pl,i)=>`
+      <div class="platform-row ${i===0?'best':''}">
+        <div class="plogo" style="background:${platformColor(pl.name)}">${platformInitials(pl.name)}</div>
+        <div class="prow-mid">
+          <div class="prow-name">${escapeHtml(pl.name)} ${i===0?'<span class="best-pill">LOWEST</span>':''}</div>
+          <div class="prow-price">${Number(pl.price).toLocaleString('en-IN')}</div>
+        </div>
+        <a class="prow-buy" href="${escapeHtml(pl.link||'#')}" target="_blank" rel="noopener noreferrer">${pl.link? 'Buy →':'No link'}</a>
+      </div>
+    `).join('');
+
+  $('productOverlay').classList.add('show');
+}
+function closeProductModal(){ $('productOverlay').classList.remove('show'); }
+
+/* ---------- Admin drawer ---------- */
+function openDrawer(){
+  $('drawer').classList.add('show');
+  $('drawerOverlay').classList.add('show');
+  if(isLoggedIn) showAdminView(); else showLoginView();
+}
+function closeDrawer(){
+  $('drawer').classList.remove('show');
+  $('drawerOverlay').classList.remove('show');
+}
+function showLoginView(){
+  $('drawerHeadTitle').textContent = 'Owner Login';
+  $('loginView').style.display = '';
+  $('adminView').style.display = 'none';
+  $('loginError').style.display = 'none';
+}
+function showAdminView(){
+  $('drawerHeadTitle').textContent = 'Add Product';
+  $('loginView').style.display = 'none';
+  $('adminView').style.display = '';
+  resetAddForm();
+  renderManageList();
+}
+
+function resetAddForm(){
+  $('pName').value=''; $('pMrp').value=''; $('pImageUrls').value=''; $('pDesc').value='';
+  uploadedImages = [];
+  renderUploadPreviews();
+  $('platformRows').innerHTML = '';
+  addPlatformRow();
+}
+
+function addPlatformRow(name='', price=''){
+  const row = document.createElement('div');
+  row.className = 'platform-input-row';
+  row.innerHTML = `
+    <input type="text" class="plat-name" placeholder="Platform (Amazon)" value="${escapeHtml(name)}">
+    <input type="number" class="plat-price" placeholder="Price ₹" value="${escapeHtml(price)}">
+    <input type="text" class="plat-link" placeholder="Buy link (https://...)">
+    <button type="button" class="rm-row" title="Remove">✕</button>
+  `;
+  row.querySelector('.rm-row').addEventListener('click', ()=> row.remove());
+  $('platformRows').appendChild(row);
+}
+
+function renderUploadPreviews(){
+  $('uploadPreviews').innerHTML = uploadedImages.map((src,i)=>`
+    <div class="upload-thumb">
+      <img src="${src}">
+      <div class="rm" data-i="${i}">✕</div>
+    </div>
+  `).join('');
+  $('uploadPreviews').querySelectorAll('.rm').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      uploadedImages.splice(Number(btn.dataset.i),1);
+      renderUploadPreviews();
+    });
+  });
+}
+
+function handleFiles(files){
+  Array.from(files).forEach(file=>{
+    if(!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = (e)=>{
+      uploadedImages.push(e.target.result);
+      renderUploadPreviews();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function renderManageList(){
+  $('prodCount').textContent = products.length;
+  const list = $('manageList');
+  if(products.length === 0){
+    list.innerHTML = `<p class="hint">No products added yet.</p>`;
+    return;
+  }
+  list.innerHTML = products.slice().reverse().map(p => `
+    <div class="manage-item">
+      ${ (p.images&&p.images[0]) ? `<img src="${escapeHtml(p.images[0])}">` : `<div class="manage-item-noimg"></div>` }
+      <div class="mi-name">${escapeHtml(p.name)}</div>
+      <button class="btn-danger" data-del="${p.id}">Delete</button>
+    </div>
+  `).join('');
+  list.querySelectorAll('[data-del]').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      products = products.filter(p=>p.id !== btn.dataset.del);
+      await saveProducts();
+      renderManageList();
+      renderGrid();
+    });
+  });
+}
+
+async function addProduct(){
+  const name = $('pName').value.trim();
+  const category = $('pCategory').value;
+  const mrp = $('pMrp').value;
+  const urlImages = $('pImageUrls').value.trim();
+  const desc = $('pDesc').value.trim();
+
+  const urlList = urlImages ? urlImages.split(',').map(s=>s.trim()).filter(Boolean) : [];
+  const images = [...uploadedImages, ...urlList];
+
+  const platforms = [];
+  $('platformRows').querySelectorAll('.platform-input-row').forEach(row=>{
+    const pname = row.querySelector('.plat-name').value.trim();
+    const pprice = row.querySelector('.plat-price').value;
+    const plink = row.querySelector('.plat-link').value.trim();
+    if(pname && pprice){
+      platforms.push({name:pname, price:pprice, link:plink});
+    }
+  });
+
+  if(!name || platforms.length===0){
+    alert('Please add a product name and at least one platform with a price.');
+    return;
+  }
+
+  const product = {
+    id: 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+    name, category, mrp, images, desc, platforms,
+    createdAt: Date.now()
+  };
+  products.push(product);
+  await saveProducts();
+
+  resetAddForm();
+  renderManageList();
+  renderGrid();
+}
+
+function attemptLogin(){
+  const u = $('loginUser').value.trim();
+  const p = $('loginPass').value;
+  if(u === CONFIG.loginUsername && p === CONFIG.loginPassword){
+    isLoggedIn = true;
+    $('loginUser').value=''; $('loginPass').value='';
+    showAdminView();
+  }else{
+    $('loginError').style.display = 'block';
+  }
+}
+
+/* ---------- theme (auto by system, overridable, remembered) ---------- */
+function getSavedTheme(){
+  try{ return localStorage.getItem('aashapura_theme'); }catch(e){ return null; }
+}
+function saveTheme(t){
+  try{ localStorage.setItem('aashapura_theme', t); }catch(e){ /* ignore */ }
+}
+function applyTheme(t){
+  document.body.setAttribute('data-theme', t);
+}
+function initTheme(){
+  const saved = getSavedTheme();
+  if(saved === 'dark' || saved === 'light'){
+    applyTheme(saved);
+  }else{
+    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    applyTheme(prefersLight ? 'light' : 'dark');
+  }
+  if(window.matchMedia){
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e)=>{
+      if(!getSavedTheme()) applyTheme(e.matches ? 'light' : 'dark');
+    });
+  }
+}
+function toggleTheme(){
+  const next = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  applyTheme(next);
+  saveTheme(next);
+}
+
+document.addEventListener('DOMContentLoaded', async ()=>{
+  initTheme();
+  $('themeToggle').addEventListener('click', toggleTheme);
+  applyConfig();
+  await loadProducts();
+
+  $('burgerBtn').addEventListener('click', openDrawer);
+  $('drawerCloseBtn').addEventListener('click', closeDrawer);
+  $('drawerOverlay').addEventListener('click', closeDrawer);
+
+  $('loginBtn').addEventListener('click', attemptLogin);
+  $('loginPass').addEventListener('keydown', e=>{ if(e.key==='Enter') attemptLogin(); });
+
+  $('logoutBtn').addEventListener('click', ()=>{
+    isLoggedIn = false;
+    showLoginView();
+  });
+
+  $('addProductBtn').addEventListener('click', addProduct);
+  $('addPlatformRowBtn').addEventListener('click', ()=>addPlatformRow());
+
+  $('uploadZone').addEventListener('click', ()=> $('fileInput').click());
+  $('fileInput').addEventListener('change', (e)=>{ handleFiles(e.target.files); e.target.value=''; });
+
+  $('modalCloseBtn').addEventListener('click', closeProductModal);
+  $('productOverlay').addEventListener('click', (e)=>{
+    if(e.target.id === 'productOverlay') closeProductModal();
+  });
+
+  function onSearch(v){ searchTerm = v; renderGrid(); }
+  $('searchInput').addEventListener('input', e=>onSearch(e.target.value));
+  $('searchInputMobile').addEventListener('input', e=>onSearch(e.target.value));
+
+  $('sortSelect').addEventListener('change', e=>{
+    sortMode = e.target.value;
+    renderGrid();
+  });
+});
+</script>
+</body>
+</html>
